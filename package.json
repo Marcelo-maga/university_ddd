@@ -10,6 +10,9 @@
   "keywords": [],
   "author": "Marcelo-maga",
   "license": "MIT",
+  "prisma": {
+    "seed": "ts-node prisma/seed.ts"
+  },
   "devDependencies": {
     "@types/express": "^4.17.17",
     "@types/node": "^20.5.0",
