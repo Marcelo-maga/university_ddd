@@ -12,7 +12,17 @@ export class AlunoRepository implements IAlunoRepository {
         const response_database = await this.prisma.aluno.findMany()
 
         response_database.forEach(aluno => {
-            console.log(aluno)
+            this.alunos.push(
+                new Aluno(
+                    aluno.id_aluno, 
+                    aluno.nome, 
+                    aluno.sobreNome, 
+                    aluno.email, 
+                    aluno.dataCadastro, 
+                    aluno.ativo, 
+                    []
+                )
+            )
         })
 
         return this.alunos
