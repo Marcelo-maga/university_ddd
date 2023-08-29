@@ -1,8 +1,9 @@
 import express, { json } from 'express'
+import { Environment } from '../environment'
 
 export default class Server {
     private readonly express: express.Application
-    private readonly port: number = 3000
+    private readonly port: string = Environment.port
     private readonly routes: express.Router
 
     constructor(routes: express.Router) {
@@ -15,8 +16,7 @@ export default class Server {
 
     public start = () => {
         this.express.listen(this.port, () => {
-            console.log("Servidor rodando na porta 3000 🏆")
+            console.log(`Servidor rodando na porta ${Environment.port} 🏆`)
         })
     }
-
 }
