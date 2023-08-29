@@ -1,16 +1,24 @@
 
 export default class Disciplina {
-    public DisciplinaId: number;
-    public Nome: string;
-    public Valor: number;
-    public Disponivel: boolean;
-    public Ead: boolean;
+    public disciplinaId?: number;
+    public nome: string;
+    public valor: number;
+    public disponivel: boolean;
+    public ead: boolean;
 
-    constructor(disciplinaId: number, nome: string, valor: number, disponivel: boolean, ead: boolean) {
-        this.DisciplinaId = disciplinaId;
-        this.Nome = nome;
-        this.Valor = valor;
-        this.Disponivel = disponivel;
-        this.Ead = ead;
+    constructor({
+        disciplinaId,
+        disponivel,
+        ead,
+        nome,
+        valor
+    }: {
+        disciplinaId?: number, nome: string, valor: number, disponivel: boolean, ead: boolean
+    }) {
+        this.disciplinaId = disciplinaId;
+        this.nome = nome;
+        this.valor = valor;
+        this.disponivel = disponivel;
+        this.ead = ead;
     }
 }
