@@ -1,16 +1,32 @@
 import Disciplina from "./Disciplina";
 
 export default class Aluno {
-    private id: number;
-    private nome: string;
-    private sobrenome: string;
-    private email: string;
-    private dataCadastro: Date;
-    private ativo: boolean;
-    private disciplinas: Array<Disciplina>;
+    public alunoId: number;
+    public nome: string;
+    public sobrenome: string;
+    public email: string;
+    public dataCadastro: Date;
+    public ativo: boolean;
+    public disciplinas?: Array<Disciplina>;
 
-    constructor(id: number, nome: string, sobrenome: string, email: string, dataCadastro: Date, ativo: boolean, disciplinas: Array<Disciplina>) {
-        this.id = id;
+    constructor({
+        alunoId,
+        nome,
+        sobrenome,
+        email,
+        dataCadastro,
+        ativo,
+        disciplinas
+    }: {
+        alunoId: number;
+        nome: string;
+        sobrenome: string;
+        email: string;
+        dataCadastro: Date;
+        ativo: boolean;
+        disciplinas?: Array<Disciplina>;
+    }) {
+        this.alunoId = alunoId;
         this.nome = nome;
         this.sobrenome = sobrenome;
         this.email = email;

@@ -8,25 +8,103 @@ export class AlunoRepository implements IAlunoRepository {
 
     // TODO: implementar retorno do banco de dados
     // TODO: popular o banco de dados
-    public async getAlunos(): Promise<Aluno[]> {
+    public async getAll(): Promise<Aluno[]> {
         const response_database = await this.prisma.aluno.findMany()
 
         response_database.forEach(aluno => {
             this.alunos.push(
-                new Aluno(
-                    aluno.id_aluno, 
-                    aluno.nome, 
-                    aluno.sobreNome, 
-                    aluno.email, 
-                    aluno.dataCadastro, 
-                    aluno.ativo, 
-                    []
-                )
+                new Aluno({
+                    alunoId: aluno.id_aluno,
+                    nome: aluno.nome,
+                    sobrenome: aluno.sobreNome,
+                    email: aluno.email,
+                    dataCadastro: aluno.dataCadastro,
+                    ativo: aluno.ativo
+                })
             )
         })
 
-        return this.alunos
-        
+        return this.alunos  
+    }
+
+    public async get(alunoId: number): Promise<Aluno> {
+        const response_database = await this.prisma.aluno.findUnique({
+            where: {
+                id_aluno: alunoId
+            }
+        })
+
+        return new Aluno({
+            alunoId: response_database!.id_aluno,
+            nome: response_database!.nome,
+            sobrenome: response_database!.sobreNome,
+            ativo: response_database!.ativo,
+            dataCadastro: response_database!.dataCadastro,
+            email: response_database!.email,
+        })
+    }
+
+    /** */
+    public async create(aluno: Omit<Aluno, "alunoId">): Promise<Aluno> {
+        const response_database = await this.prisma.aluno.create({
+            data: {
+                nome: aluno.nome,
+                sobreNome: aluno.sobrenome,
+                email: aluno.email,
+                dataCadastro: aluno.dataCadastro,
+                ativo: aluno.ativo
+            }
+        })
+
+        return new Aluno({
+            alunoId: response_database.id_aluno,
+            nome: response_database.nome,
+            sobrenome: response_database.sobreNome,
+            email: response_database.email,
+            dataCadastro: response_database.dataCadastro,
+            ativo: response_database.ativo
+        })
+    }
+
+    public async update(alunoId: number, aluno: Partial<Aluno>): Promise<Aluno> {
+        const response_database = await this.prisma.aluno.update({
+            where: {
+                id_aluno: alunoId
+            },
+            data: {
+                nome: aluno.nome,
+                sobreNome: aluno.sobrenome,
+                email: aluno.email,
+                dataCadastro: aluno.dataCadastro,
+                ativo: aluno.ativo
+            }
+        })
+
+        return new Aluno({
+            alunoId: response_database.id_aluno,
+            nome: response_database.nome,
+            sobrenome: response_database.sobreNome,
+            email: response_database.email,
+            dataCadastro: response_database.dataCadastro,
+            ativo: response_database.ativo
+        })
+    }
+
+    public async delete(alunoId: number): Promise<Aluno> {
+        const response_database = await this.prisma.aluno.delete({
+            where: {
+                id_aluno: alunoId
+            }
+        })
+
+        return new Aluno({
+            alunoId: response_database.id_aluno,
+            nome: response_database.nome,
+            sobrenome: response_database.sobreNome,
+            email: response_database.email,
+            dataCadastro: response_database.dataCadastro,
+            ativo: response_database.ativo
+        })
     }
 
 }
