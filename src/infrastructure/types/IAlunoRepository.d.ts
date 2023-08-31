@@ -1,5 +1,9 @@
 import Aluno from "../../domain/Aluno";
 
 export interface IAlunoRepository {
-    getAlunos: () => Promise<Aluno[]>;
+    getAll: () => Promise<Aluno[]>;
+    get: (alunoId: number) => Promise<Aluno>;
+    create: (Aluno: Omit<Aluno, "AlunoId">) => Promise<Aluno>;
+    update: (alunoId: number, Aluno: Partial<Aluno>) => Promise<Aluno>;
+    delete: (alunoId: number) => Promise<Aluno>;
 }
