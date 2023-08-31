@@ -1,5 +1,5 @@
-import Server from "./server/server"
-import { Router } from "./server/routes/routes"
+import Server from "./application/server"
+import { Router } from "./application/routes/routes"
 
 const server = new Server(Router())
 
