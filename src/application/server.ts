@@ -1,5 +1,5 @@
 import express, { json } from 'express'
-import { Environment } from '../shered.kernel/environment'
+import { Environment } from '../shared.kernel/environment'
 
 export default class Server {
     private readonly express: express.Application
