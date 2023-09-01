@@ -1,8 +1,8 @@
 import { Router as ExpressRouter } from "express";
-import { AlunoContoller } from "../controllers/AlunoController";
+import { AlunoController } from "../controllers/AlunoController";
 
 export const alunosRoutes = (router: ExpressRouter) => {
-  const alunoController: AlunoContoller = new AlunoContoller();
+  const alunoController: AlunoController = new AlunoController();
 
   // TODO: alterar nome da rota
   /**
@@ -21,6 +21,11 @@ export const alunosRoutes = (router: ExpressRouter) => {
     const result = await alunoController.getAllAlunos(request, response);
     response.json({ teste: result });
   });
+
+  router.post('/alunos/addNewDiscipline', async (request, response) => {
+    const result = await alunoController.addNewDiscipline(request, response)
+    response.json({ aluno: result })
+  })
 
   return router;
 };

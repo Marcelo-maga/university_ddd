@@ -6,4 +6,6 @@ export interface IAlunoRepository {
     create: (Aluno: Omit<Aluno, "AlunoId">) => Promise<Aluno>;
     update: (alunoId: number, Aluno: Partial<Aluno>) => Promise<Aluno>;
     delete: (alunoId: number) => Promise<Aluno>;
+
+    addNewDiscipline: (alunoId: number, disciplinaId: number) => Promise<Aluno>;
 }

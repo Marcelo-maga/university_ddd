@@ -107,4 +107,28 @@ export class AlunoRepository implements IAlunoRepository {
         })
     }
 
+    public async addNewDiscipline(alunoId: number, disciplinaId: number): Promise<Aluno> {
+        const response_database = await this.prisma.aluno.update({
+            where: {
+                id_aluno: alunoId
+            },
+            data: {
+                id_disciplina: {
+                    connect: {
+                        id_disciplina: disciplinaId
+                    }
+                }
+            }
+        })
+
+        return new Aluno({
+            alunoId: response_database.id_aluno,
+            nome: response_database.nome,
+            sobrenome: response_database.sobreNome,
+            email: response_database.email,
+            dataCadastro: response_database.dataCadastro,
+            ativo: response_database.ativo
+        })
+    }
+
 }
