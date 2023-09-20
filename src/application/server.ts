@@ -31,8 +31,8 @@ export default class Server {
       )
     );
 
-    this.express.use(this.routes);
     this.express.use(json());
+    this.express.use(this.routes);
   }
 
   public start = () => {

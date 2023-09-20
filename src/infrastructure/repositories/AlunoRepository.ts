@@ -27,12 +27,14 @@ export class AlunoRepository implements IAlunoRepository {
         return this.alunos  
     }
 
-    public async get(alunoId: number): Promise<Aluno> {
+    public async get(alunoId: number): Promise<Aluno | null> {
         const response_database = await this.prisma.aluno.findUnique({
             where: {
                 id_aluno: alunoId
             }
         })
+
+        if (!response_database) return null
 
         return new Aluno({
             alunoId: response_database!.id_aluno,

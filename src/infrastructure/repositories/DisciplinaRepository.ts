@@ -1,14 +1,42 @@
 import Disciplina from "../../domain/Disciplina";
+import { createPrismaClient } from "../prisma";
 import { IDisciplinaRepository } from "../types/IDisciplinaRepository";
 
 export class DisciplinaRepository implements IDisciplinaRepository {
-  public async get(): Promise<Disciplina> {
+  private prisma = createPrismaClient()
+  
+  public async get(disciplinaId: number): Promise<Disciplina | null> {
+    const response_database = await this.prisma.disciplina.findUnique({
+      where: {
+          id_disciplina: disciplinaId
+        }
+    })
+
+    if(!response_database) return null
+    
     return new Disciplina({
-      disciplinaId: 1,
-      disponivel: true,
-      ead: true,
-      nome: "Engenharia de Software",
-      valor: 23.24,
+      disciplinaId: response_database!.id_disciplina,
+      disponivel: response_database!.disponivel,
+      ead: response_database!.ead,
+      nome: response_database!.nome,
+      valor: response_database!.valor,
+    });
+  }
+  
+  public async getAlunoDisciplina(disciplinaId: number, alunoId: number): Promise<Disciplina> {
+    const response_database = await this.prisma.disciplina.findUnique({
+      where: {
+          id_disciplina: disciplinaId,
+          id_aluno: alunoId
+        }
+    })
+    
+    return new Disciplina({
+      disciplinaId: response_database!.id_disciplina,
+      disponivel: response_database!.disponivel,
+      ead: response_database!.ead,
+      nome: response_database!.nome,
+      valor: response_database!.valor,
     });
   }
 
