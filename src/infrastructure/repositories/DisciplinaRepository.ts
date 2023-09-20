@@ -5,12 +5,14 @@ import { IDisciplinaRepository } from "../types/IDisciplinaRepository";
 export class DisciplinaRepository implements IDisciplinaRepository {
   private prisma = createPrismaClient()
   
-  public async get(disciplinaId: number): Promise<Disciplina> {
+  public async get(disciplinaId: number): Promise<Disciplina | null> {
     const response_database = await this.prisma.disciplina.findUnique({
       where: {
           id_disciplina: disciplinaId
         }
     })
+
+    if(!response_database) return null
     
     return new Disciplina({
       disciplinaId: response_database!.id_disciplina,

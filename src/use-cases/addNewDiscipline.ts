@@ -9,16 +9,16 @@ export class addNewDiscipline {
     ) {}
 
     async execute(alunoId: number, disciplinaId: number) {
-        console.log("a")
-        if (!this.alunoRepository.get(alunoId)){
+
+        if (!await this.alunoRepository.get(alunoId)){
             return "O código do aluno está errado"
         }
-
-        if (!this.disciplinaRepository.get(disciplinaId)){
+        
+        if (!await this.disciplinaRepository.get(disciplinaId)){
             return "O código da disciplina está errado"
         }
 
-        if (this.disciplinaRepository.getAlunoDisciplina(disciplinaId, alunoId) != null){
+        if (await this.disciplinaRepository.getAlunoDisciplina(disciplinaId, alunoId) != null){
             return "O aluno já está matriculado nesta disciplina"
         }
 
