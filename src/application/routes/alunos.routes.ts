@@ -7,8 +7,25 @@ export const alunosRoutes = (router: ExpressRouter) => {
   // TODO: alterar nome da rota
   /**
    * @openapi
-   *  /getAllAlunos:
+   * /alunos/getAll:
    *   get:
+   *     description: Rota de get aluno
+   *     responses:
+   *       '200':
+   *         description: Sucesso
+   *       '500':
+   *         description: Error
+   *
+   */
+  router.get("/alunos/getAll", async (request, response) => {
+    const result = await alunoController.getAllAlunos(request, response);
+    response.json({ teste: result });
+  });
+
+  /**
+   * @openapi
+   *  /alunos/addNewDiscipline:
+   *   post:
    *    description: Rota de get aluno
    *    responses:
    *    '200':
@@ -17,14 +34,13 @@ export const alunosRoutes = (router: ExpressRouter) => {
    *      description: Error
    *
    */
-  router.get("/getAllAlunos", async (request, response) => {
-    const result = await alunoController.getAllAlunos(request, response);
-    response.json({ teste: result });
-  });
-
   router.post('/alunos/addNewDiscipline', async (request, response) => {
-    const result = await alunoController.addNewDiscipline(request, response)
-    response.json({ aluno: result })
+    try {
+      const result = await alunoController.addNewDiscipline(request, response)
+      response.json({ aluno: result })
+    } catch (error: any) {
+      response.status(400).json({ "message": error.message })
+    }
   })
 
   return router;

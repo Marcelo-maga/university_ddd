@@ -1,7 +1,7 @@
 import { Request, Response } from "express"
 import { AlunoRepository } from "../../infrastructure/repositories/AlunoRepository"
 import { DisciplinaRepository } from "../../infrastructure/repositories/DisciplinaRepository";
-import { addNewDiscipline } from "../../use-cases/addNewDiscipline";
+import { addNewDiscipline } from "../../domain/useCases/addNewDiscipline";
 import Aluno from "../../domain/Aluno";
 
 export class AlunoController {
@@ -19,8 +19,14 @@ export class AlunoController {
         return await this.alunoRepository.getAll()
     }
 
-    async addNewDiscipline(request: Request, response: Response): Promise<Aluno | string> {
+    async addNewDiscipline(request: Request, response: Response) {
         const { alunoId, disciplinaId } = request.body
-        return await this.addNewDisc.execute(alunoId, disciplinaId)
+        
+        try {
+            const result = await this.addNewDisc.execute(alunoId, disciplinaId)
+            return result
+        } catch (error: any) {
+            throw error
+        }
     }
 }

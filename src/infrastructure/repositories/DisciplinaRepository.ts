@@ -22,23 +22,6 @@ export class DisciplinaRepository implements IDisciplinaRepository {
       valor: response_database!.valor,
     });
   }
-  
-  public async getAlunoDisciplina(disciplinaId: number, alunoId: number): Promise<Disciplina> {
-    const response_database = await this.prisma.disciplina.findUnique({
-      where: {
-          id_disciplina: disciplinaId,
-          id_aluno: alunoId
-        }
-    })
-    
-    return new Disciplina({
-      disciplinaId: response_database!.id_disciplina,
-      disponivel: response_database!.disponivel,
-      ead: response_database!.ead,
-      nome: response_database!.nome,
-      valor: response_database!.valor,
-    });
-  }
 
   public async getAll(): Promise<Disciplina[]> {
     return new Array(

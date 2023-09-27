@@ -115,11 +115,14 @@ export class AlunoRepository implements IAlunoRepository {
                 id_aluno: alunoId
             },
             data: {
-                id_disciplina: {
+                disciplinas: {
                     connect: {
                         id_disciplina: disciplinaId
                     }
                 }
+            },
+            include: {
+                disciplinas: true
             }
         })
 
@@ -129,7 +132,8 @@ export class AlunoRepository implements IAlunoRepository {
             sobrenome: response_database.sobreNome,
             email: response_database.email,
             dataCadastro: response_database.dataCadastro,
-            ativo: response_database.ativo
+            ativo: response_database.ativo,
+            disciplinas: response_database.disciplinas
         })
     }
 

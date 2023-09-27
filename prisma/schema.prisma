@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -18,16 +15,15 @@ model Aluno {
   dataCadastro DateTime
   ativo        Boolean
 
-  id_disciplina Disciplina[]
+  disciplinas Disciplina[] @relation("AlunoDisciplina")
 }
 
 model Disciplina {
   id_disciplina Int     @id @default(autoincrement())
-  nome          String
+  nome          String  @unique
   valor         Int
   disponivel    Boolean
   ead           Boolean
 
-  aluno    Aluno @relation(fields: [id_aluno], references: [id_aluno])
-  id_aluno Int
+  alunos Aluno[] @relation("AlunoDisciplina")
 }

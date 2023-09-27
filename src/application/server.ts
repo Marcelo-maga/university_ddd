@@ -17,17 +17,7 @@ export default class Server {
       "/docs",
       swaggerUi.serve,
       swaggerUi.setup(
-        swaggerJSDoc({
-          definition: {
-            openapi: "3.0.0",
-            info: {
-              title: "Hello World",
-              version: "1.0.0",
-              description: "A simple Express Library API",
-            },
-          },
-          apis: ["src/server/routes/*.ts"],
-        })
+        Swagger.spec
       )
     );
 

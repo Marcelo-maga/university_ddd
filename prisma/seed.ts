@@ -24,6 +24,30 @@ async function main() {
       ativo: true,
     },
   });
+
+  const matematica = await prisma.disciplina.upsert({
+    where: { nome: "Matemática" },
+    update: {},
+    create: {
+      nome: "Matemática",
+      disponivel: true,
+      ead: true,
+      valor: 100,
+    },
+  });
+
+  const historia = await prisma.disciplina.upsert({
+    where: { nome: "História" },
+    update: {},
+    create: {
+      nome: "História",
+      disponivel: true,
+      ead: true,
+      valor: 100,
+    },
+  });
+
+
 }
 
 main()

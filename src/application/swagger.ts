@@ -10,7 +10,7 @@ export class Swagger {
         description: "A simple Express Library API",
       },
     },
-    apis: ["src/server/routes/*.ts"],
+    apis: ["src/application/routes/*.ts"],
   };
 
   public static spec = swaggerJSDoc(this.config);
