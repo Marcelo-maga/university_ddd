@@ -6,10 +6,16 @@ import {
   UseCasesFactory,
 } from "../../shared.kernel/factory";
 import { Disciplina } from "../../domains/secretary";
+import { ObterDisciplina } from "../../domains/secretary/useCases/disciplina/ObterDisciplina";
+import { ListarDisciplinas } from "../../domains/secretary/useCases/disciplina/ListarDisciplinas";
 
 export class DisciplinaController {
   private disciplinaRepository: DisciplinaRepository;
   private criarDisciplina: CriarDisciplina;
+  private obterDisciplina: ObterDisciplina;
+  private listarDisciplinas: ListarDisciplinas;
+  private editarDisciplina: EditarDisciplina;
+  private deletarDisciplina: DeletarDisciplina;
 
   constructor() {
     this.disciplinaRepository = RepositoryFactory.createDisciplinaRepository();

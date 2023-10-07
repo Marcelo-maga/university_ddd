@@ -3,18 +3,21 @@ import { createPrismaClient } from "../prisma";
 import { IDisciplinaRepository } from "../types/IDisciplinaRepository";
 
 export class DisciplinaRepository implements IDisciplinaRepository {
-  private prisma = createPrismaClient()
-  
-  public async get(disciplinaId?: number, nome?: string): Promise<Disciplina | null> {
+  private prisma = createPrismaClient();
+
+  public async get(
+    disciplinaId?: number,
+    nome?: string
+  ): Promise<Disciplina | null> {
     const response_database = await this.prisma.disciplina.findUnique({
       where: {
-          id_disciplina: disciplinaId,
-          ...(nome && { nome })
-        }
-    })
+        id_disciplina: disciplinaId,
+        ...(nome && { nome }),
+      },
+    });
 
-    if(!response_database) return null
-    
+    if (!response_database) return null;
+
     return new Disciplina({
       disciplinaId: response_database!.id_disciplina,
       disponivel: response_database!.disponivel,
@@ -24,7 +27,7 @@ export class DisciplinaRepository implements IDisciplinaRepository {
     });
   }
 
-  public async getAll(): Promise<Disciplina[]> {
+  public async getAll(): Promise<Disciplina[] | null> {
     return new Array(
       new Disciplina({
         disciplinaId: 1,
@@ -40,30 +43,35 @@ export class DisciplinaRepository implements IDisciplinaRepository {
     disciplina: Omit<Disciplina, "disciplinaId">
   ): Promise<Omit<Disciplina, "disciplinaId">> {
     const disciplinaCriada = await this.prisma.disciplina.create({
-      data: disciplina
-    })
+      data: disciplina,
+    });
 
-    return new Disciplina(disciplinaCriada)
+    return new Disciplina(disciplinaCriada);
   }
 
   public async update(
     disciplinaId: Disciplina["disciplinaId"],
     disciplina: Partial<Disciplina>
   ): Promise<Disciplina> {
-    // temporario: para mockar o que o próprio Prisma ORM faria
-    let disciplinaToBeUpdated: Partial<Disciplina> = new Disciplina({
-      disciplinaId: 1,
-      disponivel: true,
-      ead: true,
-      nome: "Engenharia de Software",
-      valor: 23.24,
+    const disciplinaAtualizada = await this.prisma.disciplina.update({
+      where: {
+        id_disciplina: disciplinaId,
+      },
+      data: disciplina,
     });
 
-    disciplinaToBeUpdated = {
-      disciplinaId,
-      ...disciplina,
-    };
+    return new Disciplina(disciplinaAtualizada);
+  }
 
-    return new Promise<Disciplina>(() => disciplinaToBeUpdated);
+  public async delete(
+    disciplinaId: Disciplina["disciplinaId"]
+  ): Promise<Disciplina> {
+    const disciplinaDeletada = await this.prisma.disciplina.delete({
+      where: {
+        id_disciplina: disciplinaId,
+      },
+    });
+
+    return new Disciplina(disciplinaDeletada);
   }
 }
