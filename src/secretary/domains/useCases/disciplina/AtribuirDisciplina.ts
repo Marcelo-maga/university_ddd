@@ -1,7 +1,7 @@
-import { AlunoRepository } from "../../../../infrastructure/repositories/AlunoRepository"
-import { DisciplinaRepository } from "../../../../infrastructure/repositories/DisciplinaRepository"
+import { AlunoRepository } from "../../../infrastructure/repositories/AlunoRepository"
+import { DisciplinaRepository } from "../../../infrastructure/repositories/DisciplinaRepository"
 
-export class atribuirDisciplina {
+export class AtribuirDisciplina {
     constructor(
         private readonly alunoRepository: AlunoRepository,
         private readonly disciplinaRepository: DisciplinaRepository

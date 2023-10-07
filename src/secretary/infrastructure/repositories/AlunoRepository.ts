@@ -1,6 +1,6 @@
-import { Aluno } from "../../domains/secretary"
-import { IAlunoRepository } from "../types/IAlunoRepository"
-import { createPrismaClient } from "../prisma";
+import { Aluno } from "../../domains/Aluno";
+import { IAlunoRepository } from "../interfaces/IAlunoRepository"
+import { createPrismaClient } from "../../../shared.kernel/prisma";
 
 export class AlunoRepository implements IAlunoRepository {
     private alunos: Aluno[] = [];

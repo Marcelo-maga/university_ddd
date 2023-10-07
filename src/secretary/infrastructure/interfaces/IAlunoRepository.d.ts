@@ -1,4 +1,4 @@
-import { Aluno } from "../../domains/secretary";
+import { Aluno } from "../../../domains/secretary";
 
 export interface IAlunoRepository {
     getAll: () => Promise<Aluno[]>;

@@ -1,4 +1,4 @@
-import Disciplina from "../../domain/Disciplina";
+import Disciplina from "../../domains/Disciplina";
 
 export interface IDisciplinaRepository {
   get: (disciplinaId: number) => Promise<Disciplina | null>;
