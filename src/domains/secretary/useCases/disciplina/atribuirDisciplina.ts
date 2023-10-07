@@ -1,7 +1,7 @@
-import { AlunoRepository } from "../../infrastructure/repositories/AlunoRepository"
-import { DisciplinaRepository } from "../../infrastructure/repositories/DisciplinaRepository"
+import { AlunoRepository } from "../../../../infrastructure/repositories/AlunoRepository"
+import { DisciplinaRepository } from "../../../../infrastructure/repositories/DisciplinaRepository"
 
-export class addNewDiscipline {
+export class atribuirDisciplina {
     constructor(
         private readonly alunoRepository: AlunoRepository,
         private readonly disciplinaRepository: DisciplinaRepository
@@ -19,7 +19,7 @@ export class addNewDiscipline {
             throw new Error("A disciplina não existe")
         }
         
-        if (aluno.disciplinas?.find(disciplina => disciplina.disciplinaId === disciplinaId)) {
+        if (aluno.disciplinas?.find((disciplina: any) => disciplina.disciplinaId === disciplinaId)) {
             throw new Error("Aluno ja está cadastrado nesse disciplina")
         }
 

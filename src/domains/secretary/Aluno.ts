@@ -1,6 +1,6 @@
-import Disciplina from "./Disciplina";
+import { Disciplina } from "./Disciplina";
 
-export default class Aluno {
+export class Aluno {
     public alunoId: number;
     public nome: string;
     public sobrenome: string;
