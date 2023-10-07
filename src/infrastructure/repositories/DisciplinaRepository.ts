@@ -1,4 +1,4 @@
-import Disciplina from "../../domain/Disciplina";
+import { Disciplina } from "../../domains/secretary";
 import { createPrismaClient } from "../prisma";
 import { IDisciplinaRepository } from "../types/IDisciplinaRepository";
 

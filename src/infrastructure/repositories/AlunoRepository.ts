@@ -1,4 +1,4 @@
-import Aluno from "../../domain/Aluno"
+import { Aluno } from "../../domains/secretary"
 import { IAlunoRepository } from "../types/IAlunoRepository"
 import { createPrismaClient } from "../prisma";
 

@@ -1,5 +1,4 @@
-
-export default class Disciplina {
+export class Disciplina {
     public disciplinaId?: number;
     public nome: string;
     public valor: number;
