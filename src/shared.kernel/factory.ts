@@ -9,6 +9,10 @@ import {
 import {
   AtribuirDisciplina,
   CriarDisciplina,
+  DeletarDisciplina,
+  EditarDisciplina,
+  ListarDisciplinas,
+  ObterDisciplina,
 } from "../domains/secretary/useCases/disciplina";
 
 export class ControllerFactory {
@@ -38,5 +42,17 @@ export class UseCasesFactory {
       RepositoryFactory.createAlunoRepository(),
       RepositoryFactory.createDisciplinaRepository()
     );
+  }
+  static createObterDisciplina() {
+    return new ObterDisciplina(RepositoryFactory.createDisciplinaRepository());
+  }
+  static createListarDisciplinas() {
+    return new ListarDisciplinas(RepositoryFactory.createDisciplinaRepository());
+  }
+  static createEditarDisciplina() {
+    return new EditarDisciplina(RepositoryFactory.createDisciplinaRepository());
+  }
+  static createDeletarDisciplina() {
+    return new DeletarDisciplina(RepositoryFactory.createDisciplinaRepository());
   }
 }

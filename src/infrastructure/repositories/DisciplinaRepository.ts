@@ -28,14 +28,19 @@ export class DisciplinaRepository implements IDisciplinaRepository {
   }
 
   public async getAll(): Promise<Disciplina[] | null> {
-    return new Array(
-      new Disciplina({
-        disciplinaId: 1,
-        disponivel: true,
-        ead: true,
-        nome: "Engenharia de Software",
-        valor: 23.24,
-      })
+    const response_database = await this.prisma.disciplina.findMany();
+
+    if (!response_database) return null;
+
+    return response_database.map(
+      (disciplina) =>
+        new Disciplina({
+          disciplinaId: disciplina.id_disciplina,
+          disponivel: disciplina.disponivel,
+          ead: disciplina.ead,
+          nome: disciplina.nome,
+          valor: disciplina.valor,
+        })
     );
   }
 

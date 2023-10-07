@@ -1,13 +1,10 @@
 import { Request, Response } from "express";
-import { CriarDisciplina } from "../../domains/secretary/useCases/disciplina/Criar";
 import { DisciplinaRepository } from "../../infrastructure/repositories/DisciplinaRepository";
 import {
   RepositoryFactory,
   UseCasesFactory,
 } from "../../shared.kernel/factory";
-import { Disciplina } from "../../domains/secretary";
-import { ObterDisciplina } from "../../domains/secretary/useCases/disciplina/ObterDisciplina";
-import { ListarDisciplinas } from "../../domains/secretary/useCases/disciplina/ListarDisciplinas";
+import { CriarDisciplina, DeletarDisciplina, Disciplina, EditarDisciplina, ListarDisciplinas, ObterDisciplina } from "../../domains/secretary";
 
 export class DisciplinaController {
   private disciplinaRepository: DisciplinaRepository;
@@ -20,6 +17,10 @@ export class DisciplinaController {
   constructor() {
     this.disciplinaRepository = RepositoryFactory.createDisciplinaRepository();
     this.criarDisciplina = UseCasesFactory.createCriarDisciplina();
+    this.obterDisciplina = UseCasesFactory.createObterDisciplina();
+    this.listarDisciplinas = UseCasesFactory.createListarDisciplinas();
+    this.editarDisciplina = UseCasesFactory.createEditarDisciplina();
+    this.deletarDisciplina = UseCasesFactory.createDeletarDisciplina();
   }
 
   async create(disciplina: Disciplina) {
@@ -34,6 +35,38 @@ export class DisciplinaController {
       }
 
       return await this.criarDisciplina.execute(disciplina);
+    } catch (error: any) {
+      throw new Error(error);
+    }
+  }
+
+  async get(disciplinaId: number) {
+    try {
+      return await this.obterDisciplina.execute(disciplinaId);
+    } catch (error: any) {
+      throw new Error(error);
+    }
+  }
+
+  async getAll() {
+    try {
+      return await this.listarDisciplinas.execute();
+    } catch (error: any) {
+      throw new Error(error);
+    }
+  }
+
+  async update(disciplinaId: number, disciplina: Disciplina) {
+    try {
+      return await this.editarDisciplina.execute(disciplinaId, disciplina);
+    } catch (error: any) {
+      throw new Error(error);
+    }
+  }
+
+  async delete(disciplinaId: number) {
+    try {
+      return await this.deletarDisciplina.execute(disciplinaId);
     } catch (error: any) {
       throw new Error(error);
     }
