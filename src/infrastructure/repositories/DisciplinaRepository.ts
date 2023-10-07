@@ -5,10 +5,11 @@ import { IDisciplinaRepository } from "../types/IDisciplinaRepository";
 export class DisciplinaRepository implements IDisciplinaRepository {
   private prisma = createPrismaClient()
   
-  public async get(disciplinaId: number): Promise<Disciplina | null> {
+  public async get(disciplinaId?: number, nome?: string): Promise<Disciplina | null> {
     const response_database = await this.prisma.disciplina.findUnique({
       where: {
-          id_disciplina: disciplinaId
+          id_disciplina: disciplinaId,
+          ...(nome && { nome })
         }
     })
 
@@ -38,12 +39,11 @@ export class DisciplinaRepository implements IDisciplinaRepository {
   public async create(
     disciplina: Omit<Disciplina, "disciplinaId">
   ): Promise<Omit<Disciplina, "disciplinaId">> {
-    return new Disciplina({
-      disponivel: disciplina.disponivel,
-      ead: disciplina.ead,
-      nome: disciplina.nome,
-      valor: disciplina.valor,
-    });
+    const disciplinaCriada = await this.prisma.disciplina.create({
+      data: disciplina
+    })
+
+    return new Disciplina(disciplinaCriada)
   }
 
   public async update(
