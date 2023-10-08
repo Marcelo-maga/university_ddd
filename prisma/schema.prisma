@@ -16,6 +16,7 @@ model Aluno {
   ativo        Boolean
 
   disciplinas Disciplina[] @relation("AlunoDisciplina")
+  Matricula   Matricula[]
 }
 
 model Disciplina {
@@ -26,4 +27,15 @@ model Disciplina {
   ead           Boolean
 
   alunos Aluno[] @relation("AlunoDisciplina")
+}
+
+model Matricula {
+  id_matricula  Int      @id @default(autoincrement())
+  data_cadastro DateTime
+  data_inicio   DateTime
+  previsao_fim  DateTime
+  curso         String
+  id_aluno      Int
+
+  aluno Aluno @relation(fields: [id_aluno], references: [id_aluno])
 }
