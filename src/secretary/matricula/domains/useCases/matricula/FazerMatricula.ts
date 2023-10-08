@@ -4,7 +4,7 @@ import { Matricula } from "../../Matricula";
 export class FazerMatricula {
   constructor(private readonly matriculaRepository: MatriculaRepository) {}
 
-  async execute(matricula: Matricula) {
+  async execute(matricula) {
     const alunoMatriculas = this.matriculaRepository.getMatriculaByAluno(
       matricula.alunoId
     );
