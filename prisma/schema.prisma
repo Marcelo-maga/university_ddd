@@ -35,6 +35,7 @@ model Matricula {
   data_inicio   DateTime
   previsao_fim  DateTime
   curso         String
+  trancado      Boolean  @default(false)
   id_aluno      Int
 
   aluno Aluno @relation(fields: [id_aluno], references: [id_aluno])
