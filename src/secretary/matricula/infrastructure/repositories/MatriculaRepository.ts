@@ -6,8 +6,6 @@ export class MatriculaRepository implements IMatriculaRepository {
   private matriculas: Matricula[] = [];
   private prisma = createPrismaClient();
 
-  // TODO: implementar retorno do banco de dados
-  // TODO: popular o banco de dados
   public async getAll(): Promise<Matricula[]> {
     const response_database = await this.prisma.matricula.findMany();
 
@@ -46,7 +44,29 @@ export class MatriculaRepository implements IMatriculaRepository {
     });
   }
 
-  /** */
+  public async getMatriculaByAluno(alunoId: number): Promise<Matricula | null> {
+    const response_database = await this.prisma.matricula.findUnique({
+      where: {
+        id_aluno: alunoId,
+      },
+    });
+
+    response_database.forEach((matricula) => {
+      this.matriculas.push(
+        new Matricula({
+          matriculaId: matricula.id_matricula,
+          dataCadastro: matricula.data_cadastro,
+          dataInicio: matricula.data_inicio,
+          previsaoFim: matricula.previsao_fim,
+          curso: matricula.curso,
+          alunoId: matricula.id_aluno,
+        })
+      );
+    });
+
+    return this.matriculas;
+  }
+
   public async create(
     matricula: Omit<Matricula, "matriculaId">
   ): Promise<Matricula> {
