@@ -24,5 +24,17 @@ export const alunosRoutes = (router: ExpressRouter) => {
     }
   });
 
+  router.put("/matricula/trancarMatricula", async (request, response) => {
+    try {
+      const result = await matriculaController.trancarMatricula(
+        request,
+        response
+      );
+      response.json({ matricula: result });
+    } catch (error: any) {
+      response.status(400).json({ message: error.message });
+    }
+  });
+
   return router;
 };
