@@ -1,6 +1,26 @@
-import { AlunoController, DisciplinaController } from "../application/controllers";
-import { CriarDisciplina, AtribuirDisciplina, ObterDisciplina, ListarDisciplinas, EditarDisciplina, DeletarDisciplina } from "../secretary/domain";
-import { AlunoRepository, DisciplinaRepository } from "../secretary/infrastructure/repositories";
+import {
+  AlunoController,
+  DisciplinaController,
+} from "../application/controllers";
+import {
+  CriarDisciplina,
+  AtribuirDisciplina,
+  ObterDisciplina,
+  ListarDisciplinas,
+  EditarDisciplina,
+  DeletarDisciplina,
+} from "../secretary/domain";
+import {
+  CriarAluno,
+  DeletarAluno,
+  EditarAluno,
+  ListarAlunos,
+  ObterAluno,
+} from "../secretary/domain/useCases/aluno";
+import {
+  AlunoRepository,
+  DisciplinaRepository,
+} from "../secretary/infrastructure/repositories";
 
 export class ControllerFactory {
   static createAlunoController() {
@@ -34,12 +54,36 @@ export class UseCasesFactory {
     return new ObterDisciplina(RepositoryFactory.createDisciplinaRepository());
   }
   static createListarDisciplinas() {
-    return new ListarDisciplinas(RepositoryFactory.createDisciplinaRepository());
+    return new ListarDisciplinas(
+      RepositoryFactory.createDisciplinaRepository()
+    );
   }
   static createEditarDisciplina() {
     return new EditarDisciplina(RepositoryFactory.createDisciplinaRepository());
   }
   static createDeletarDisciplina() {
-    return new DeletarDisciplina(RepositoryFactory.createDisciplinaRepository());
+    return new DeletarDisciplina(
+      RepositoryFactory.createDisciplinaRepository()
+    );
+  }
+
+  static createCriarAluno() {
+    return new CriarAluno(RepositoryFactory.createAlunoRepository());
+  }
+
+  static createObterAluno() {
+    return new ObterAluno(RepositoryFactory.createAlunoRepository());
+  }
+
+  static createListarAlunos() {
+    return new ListarAlunos(RepositoryFactory.createAlunoRepository());
+  }
+
+  static createEditarAluno() {
+    return new EditarAluno(RepositoryFactory.createAlunoRepository());
+  }
+
+  static createDeletarAluno() {
+    return new DeletarAluno(RepositoryFactory.createAlunoRepository());
   }
 }
