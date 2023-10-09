@@ -1,4 +1,4 @@
-import { DisciplinaRepository } from "../../../../infrastructure/repositories";
+import { DisciplinaRepository } from "../../../infrastructure/repositories";
 import { Disciplina } from "../../Disciplina";
 
 export class EditarDisciplina {

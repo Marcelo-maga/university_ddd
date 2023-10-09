@@ -1,4 +1,4 @@
-import { DisciplinaRepository } from "../../../../infrastructure/repositories";
+import { DisciplinaRepository } from "../../../infrastructure/repositories";
 
 export class ObterDisciplina {
   constructor(private readonly disciplinaRepository: DisciplinaRepository) {}

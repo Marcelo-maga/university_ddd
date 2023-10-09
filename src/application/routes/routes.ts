@@ -9,7 +9,7 @@ export const Router = (): ExpressRouter => {
    * @swagger
    * components:
    *   schemas:
-   *     Discplina:
+   *     Disciplina:
    *       type: object
    *       properties:
    *         id:

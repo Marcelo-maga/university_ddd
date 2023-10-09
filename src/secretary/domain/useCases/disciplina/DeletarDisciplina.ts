@@ -1,4 +1,4 @@
-import { DisciplinaRepository } from "../../../../infrastructure/repositories";
+import { DisciplinaRepository } from "../../../infrastructure/repositories";
 
 export class DeletarDisciplina {
   constructor(private readonly disciplinaRepository: DisciplinaRepository) {}

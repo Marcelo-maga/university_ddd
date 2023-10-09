@@ -1,8 +1,11 @@
 import { Request, Response } from "express";
-import { AlunoRepository } from "../../infrastructure/repositories/AlunoRepository";
-import { DisciplinaRepository } from "../../infrastructure/repositories/DisciplinaRepository";
-import { Aluno, AtribuirDisciplina } from "../../domains/secretary";
 import { UseCasesFactory } from "../../shared.kernel/factory";
+
+import { Aluno, AtribuirDisciplina } from "../../secretary/domain";
+import {
+  AlunoRepository,
+  DisciplinaRepository,
+} from "../../secretary/infrastructure/repositories";
 
 export class AlunoController {
   private alunoRepository: AlunoRepository;

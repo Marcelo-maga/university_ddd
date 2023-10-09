@@ -1,19 +1,6 @@
-import {
-  AlunoController,
-  DisciplinaController,
-} from "../application/controllers";
-import {
-  AlunoRepository,
-  DisciplinaRepository,
-} from "../infrastructure/repositories";
-import {
-  AtribuirDisciplina,
-  CriarDisciplina,
-  DeletarDisciplina,
-  EditarDisciplina,
-  ListarDisciplinas,
-  ObterDisciplina,
-} from "../domains/secretary/useCases/disciplina";
+import { AlunoController, DisciplinaController } from "../application/controllers";
+import { CriarDisciplina, AtribuirDisciplina, ObterDisciplina, ListarDisciplinas, EditarDisciplina, DeletarDisciplina } from "../secretary/domain";
+import { AlunoRepository, DisciplinaRepository } from "../secretary/infrastructure/repositories";
 
 export class ControllerFactory {
   static createAlunoController() {

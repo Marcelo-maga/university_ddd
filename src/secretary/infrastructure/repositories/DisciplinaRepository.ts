@@ -1,6 +1,6 @@
-import { Disciplina } from "../../domains/secretary";
-import { createPrismaClient } from "../prisma";
-import { IDisciplinaRepository } from "../types/IDisciplinaRepository";
+import { Disciplina } from "../../domain/Disciplina";
+import { createPrismaClient } from "../../../shared.kernel/prisma";
+import { IDisciplinaRepository } from "../interfaces/IDisciplinaRepository";
 
 export class DisciplinaRepository implements IDisciplinaRepository {
   private prisma = createPrismaClient();

@@ -1,4 +1,4 @@
-import { DisciplinaRepository } from "../../../../infrastructure/repositories/DisciplinaRepository";
+import { DisciplinaRepository } from "../../../infrastructure/repositories";
 import { Disciplina } from "../../Disciplina";
 
 export class CriarDisciplina {
@@ -13,7 +13,7 @@ export class CriarDisciplina {
     if (disciplinaExistente) {
       throw new Error("Já existe uma disciplina com esse nome");
     }
-    
+
     const newDisciplina = await this.disciplinaRepository.create(disciplina);
     return newDisciplina;
   }

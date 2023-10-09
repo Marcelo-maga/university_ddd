@@ -1,10 +1,19 @@
 import { Request, Response } from "express";
-import { DisciplinaRepository } from "../../infrastructure/repositories/DisciplinaRepository";
+
 import {
   RepositoryFactory,
   UseCasesFactory,
 } from "../../shared.kernel/factory";
-import { CriarDisciplina, DeletarDisciplina, Disciplina, EditarDisciplina, ListarDisciplinas, ObterDisciplina } from "../../domains/secretary";
+
+import { DisciplinaRepository } from "../../secretary/infrastructure/repositories";
+import {
+  CriarDisciplina,
+  DeletarDisciplina,
+  Disciplina,
+  EditarDisciplina,
+  ListarDisciplinas,
+  ObterDisciplina,
+} from "../../secretary/domain";
 
 export class DisciplinaController {
   private disciplinaRepository: DisciplinaRepository;

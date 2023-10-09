@@ -1,5 +1,4 @@
-import { AlunoRepository } from "../../../../infrastructure/repositories/AlunoRepository";
-import { DisciplinaRepository } from "../../../../infrastructure/repositories/DisciplinaRepository";
+import { AlunoRepository, DisciplinaRepository } from "../../../infrastructure/repositories";
 
 export class AtribuirDisciplina {
   constructor(
