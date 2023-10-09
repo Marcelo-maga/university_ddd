@@ -1,23 +1,19 @@
-import { Disciplina } from "../../domain/Disciplina";
+import { Disciplina } from "../../domains/Disciplina";
 import { createPrismaClient } from "../../../shared.kernel/prisma";
 import { IDisciplinaRepository } from "../interfaces/IDisciplinaRepository";
 
 export class DisciplinaRepository implements IDisciplinaRepository {
-  private prisma = createPrismaClient();
-
-  public async get(
-    disciplinaId?: number,
-    nome?: string
-  ): Promise<Disciplina | null> {
+  private prisma = createPrismaClient()
+  
+  public async get(disciplinaId: number): Promise<Disciplina | null> {
     const response_database = await this.prisma.disciplina.findUnique({
       where: {
-        id_disciplina: disciplinaId,
-        ...(nome && { nome }),
-      },
-    });
+          id_disciplina: disciplinaId
+        }
+    })
 
-    if (!response_database) return null;
-
+    if(!response_database) return null
+    
     return new Disciplina({
       disciplinaId: response_database!.id_disciplina,
       disponivel: response_database!.disponivel,
@@ -27,56 +23,47 @@ export class DisciplinaRepository implements IDisciplinaRepository {
     });
   }
 
-  public async getAll(): Promise<Disciplina[] | null> {
-    const response_database = await this.prisma.disciplina.findMany();
-
-    if (!response_database) return null;
-
-    return response_database.map(
-      (disciplina) =>
-        new Disciplina({
-          disciplinaId: disciplina.id_disciplina,
-          disponivel: disciplina.disponivel,
-          ead: disciplina.ead,
-          nome: disciplina.nome,
-          valor: disciplina.valor,
-        })
+  public async getAll(): Promise<Disciplina[]> {
+    return new Array(
+      new Disciplina({
+        disciplinaId: 1,
+        disponivel: true,
+        ead: true,
+        nome: "Engenharia de Software",
+        valor: 23.24,
+      })
     );
   }
 
   public async create(
     disciplina: Omit<Disciplina, "disciplinaId">
   ): Promise<Omit<Disciplina, "disciplinaId">> {
-    const disciplinaCriada = await this.prisma.disciplina.create({
-      data: disciplina,
+    return new Disciplina({
+      disponivel: disciplina.disponivel,
+      ead: disciplina.ead,
+      nome: disciplina.nome,
+      valor: disciplina.valor,
     });
-
-    return new Disciplina(disciplinaCriada);
   }
 
   public async update(
     disciplinaId: Disciplina["disciplinaId"],
     disciplina: Partial<Disciplina>
   ): Promise<Disciplina> {
-    const disciplinaAtualizada = await this.prisma.disciplina.update({
-      where: {
-        id_disciplina: disciplinaId,
-      },
-      data: disciplina,
+    // temporario: para mockar o que o próprio Prisma ORM faria
+    let disciplinaToBeUpdated: Partial<Disciplina> = new Disciplina({
+      disciplinaId: 1,
+      disponivel: true,
+      ead: true,
+      nome: "Engenharia de Software",
+      valor: 23.24,
     });
 
-    return new Disciplina(disciplinaAtualizada);
-  }
+    disciplinaToBeUpdated = {
+      disciplinaId,
+      ...disciplina,
+    };
 
-  public async delete(
-    disciplinaId: Disciplina["disciplinaId"]
-  ): Promise<Disciplina> {
-    const disciplinaDeletada = await this.prisma.disciplina.delete({
-      where: {
-        id_disciplina: disciplinaId,
-      },
-    });
-
-    return new Disciplina(disciplinaDeletada);
+    return new Promise<Disciplina>(() => disciplinaToBeUpdated);
   }
 }
