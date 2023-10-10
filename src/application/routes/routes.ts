@@ -1,9 +1,9 @@
-import { Router } from "express";
 import { alunosRoutes } from "./alunos.routes";
 import { disciplinaRoutes } from "./disciplina.routes";
 import { contaRoutes } from "./conta.routes";
 import { matriculaRoutes } from "./matricula.routes";
 import { produtoRoutes } from "./produto.routes";
+import { Router as ExpressRouter } from "express";
 
 // export const Router = (): ExpressRouter => {
 //   const router = ExpressRouter();
@@ -15,7 +15,7 @@ import { produtoRoutes } from "./produto.routes";
 //   return router;
 // };
 
-export const setupRoutes = (router: Router) => {
+export const setupRoutes = (router: ExpressRouter) => {
   /**
    * @swagger
    * components:
