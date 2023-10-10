@@ -525,6 +525,8 @@ export default class Server {
       }
     });
 
+    this.express.use(router)
+
     this.express.listen(this.port, () => {
       console.log(`Servidor rodando na porta ${Environment.port} 🏆`);
     });
