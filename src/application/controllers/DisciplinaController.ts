@@ -7,29 +7,29 @@ import {
 
 import { DisciplinaRepository } from "../../secretary/infrastructure/repositories";
 import {
-  CriarDisciplina,
-  DeletarDisciplina,
+  CriarDisciplinaUseCase,
+  DeletarDisciplinaUseCase,
   Disciplina,
-  EditarDisciplina,
-  ListarDisciplinas,
-  ObterDisciplina,
+  EditarDisciplinaUseCase,
+  ListarDisciplinasUseCase,
+  ObterDisciplinaUserCase,
 } from "../../secretary/domain";
 
 export class DisciplinaController {
   private disciplinaRepository: DisciplinaRepository;
-  private criarDisciplina: CriarDisciplina;
-  private obterDisciplina: ObterDisciplina;
-  private listarDisciplinas: ListarDisciplinas;
-  private editarDisciplina: EditarDisciplina;
-  private deletarDisciplina: DeletarDisciplina;
+  private criarDisciplina: CriarDisciplinaUseCase;
+  private obterDisciplina: ObterDisciplinaUserCase;
+  private listarDisciplinas: ListarDisciplinasUseCase;
+  private editarDisciplina: EditarDisciplinaUseCase;
+  private deletarDisciplina: DeletarDisciplinaUseCase;
 
   constructor() {
     this.disciplinaRepository = RepositoryFactory.createDisciplinaRepository();
-    this.criarDisciplina = UseCasesFactory.createCriarDisciplina();
-    this.obterDisciplina = UseCasesFactory.createObterDisciplina();
-    this.listarDisciplinas = UseCasesFactory.createListarDisciplinas();
-    this.editarDisciplina = UseCasesFactory.createEditarDisciplina();
-    this.deletarDisciplina = UseCasesFactory.createDeletarDisciplina();
+    this.criarDisciplina = UseCasesFactory.createCriarDisciplinaUseCase();
+    this.obterDisciplina = UseCasesFactory.createObterDisciplinaUseCase();
+    this.listarDisciplinas = UseCasesFactory.createListarDisciplinasUseCase();
+    this.editarDisciplina = UseCasesFactory.createEditarDisciplinaUseCase();
+    this.deletarDisciplina = UseCasesFactory.createDeletarDisciplinaUseCase();
   }
 
   async create(disciplina: Disciplina) {

@@ -1,10 +1,21 @@
-import { Router as ExpressRouter } from "express";
+import { Router } from "express";
 import { alunosRoutes } from "./alunos.routes";
 import { disciplinaRoutes } from "./disciplina.routes";
+import { contaRoutes } from "./conta.routes";
+import { matriculaRoutes } from "./matricula.routes";
+import { produtoRoutes } from "./produto.routes";
 
-export const Router = (): ExpressRouter => {
-  const router = ExpressRouter();
+// export const Router = (): ExpressRouter => {
+//   const router = ExpressRouter();
 
+//   router.get("/", (request, response) => {
+//     response.json({ message: "Olá mundo" });
+//   });
+
+//   return router;
+// };
+
+export const setupRoutes = (router: Router) => {
   /**
    * @swagger
    * components:
@@ -33,7 +44,7 @@ export const Router = (): ExpressRouter => {
    *           description: Se a disciplina é EAD
    *           example: true
    */
-  
+
   /**
    * @swagger
    * components:
@@ -66,19 +77,16 @@ export const Router = (): ExpressRouter => {
    *          description: Se o aluno está ativo
    *          example: true
    *        disciplinas:
-   *          type: array 
+   *          type: array
    *          items:
    *            $ref: '#/components/schemas/Disciplina'
    *          description: Disciplinas do aluno
    *          example: []
    */
-  router.get("/", (request, response) => {
-    response.json({ message: "Olá mundo" });
-  });
-
-  // router.use(alunosRoutes(router));
-  // router.use(disciplinaRoutes(router));
-  router.use(alunosRoutes(router));
-
-  return router;
+  alunosRoutes(router);
+  contaRoutes(router);
+  disciplinaRoutes(router);
+  matriculaRoutes(router);
+  alunosRoutes(router);
+  produtoRoutes(router);
 };

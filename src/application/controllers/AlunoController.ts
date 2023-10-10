@@ -1,16 +1,29 @@
 import { Request, Response } from "express";
 import { UseCasesFactory } from "../../shared.kernel/factory";
-import { Aluno, AtribuirDisciplina } from "../../secretary/domain";
+import {
+  Aluno,
+  AtribuirDisciplinaUseCase,
+  CriarAlunoUseCase,
+  DeletarAlunoUseCase,
+  EditarAlunoUseCase,
+  ListarAlunosUseCase,
+  ObterAlunoUseCase,
+} from "../../secretary/domain";
 export class AlunoController {
-  private addNewDisc: AtribuirDisciplina;
-  private criarAluno = UseCasesFactory.createCriarAluno();
-  private obterAluno = UseCasesFactory.createObterAluno();
-  private listarAlunos = UseCasesFactory.createListarAlunos();
-  private editarAluno = UseCasesFactory.createEditarAluno();
-  private deletarAluno = UseCasesFactory.createDeletarAluno();
+  private addNewDisc: AtribuirDisciplinaUseCase;
+  private criarAlunoUseCase: CriarAlunoUseCase;
+  private obterAlunoUseCase: ObterAlunoUseCase;
+  private listarAlunosUseCase: ListarAlunosUseCase;
+  private editarAlunoUseCase: EditarAlunoUseCase;
+  private deletarAlunoUseCase: DeletarAlunoUseCase;
 
   constructor() {
-    this.addNewDisc = UseCasesFactory.createAtribuirDisciplina();
+    this.addNewDisc = UseCasesFactory.createAtribuirDisciplinaUseCase();
+    this.criarAlunoUseCase = UseCasesFactory.createCriarAlunoUseCase();
+    this.obterAlunoUseCase = UseCasesFactory.createObterAlunoUseCase();
+    this.listarAlunosUseCase = UseCasesFactory.createListarAlunosUseCase();
+    this.editarAlunoUseCase = UseCasesFactory.createEditarAlunoUseCase();
+    this.deletarAlunoUseCase = UseCasesFactory.createDeletarAlunoUseCase();
   }
 
   async create(aluno: Omit<Aluno, "alunoId">) {
@@ -25,7 +38,7 @@ export class AlunoController {
         throw new Error("Preencha todos os dados do aluno");
       }
 
-      return await this.criarAluno.execute(aluno);
+      return await this.criarAlunoUseCase.execute(aluno);
     } catch (error: any) {
       throw new Error(error);
     }
@@ -33,7 +46,7 @@ export class AlunoController {
 
   async get(alunoId: number) {
     try {
-      return await this.obterAluno.execute(alunoId);
+      return await this.obterAlunoUseCase.execute(alunoId);
     } catch (error: any) {
       throw new Error(error);
     }
@@ -41,7 +54,7 @@ export class AlunoController {
 
   async getAll() {
     try {
-      return await this.listarAlunos.execute();
+      return await this.listarAlunosUseCase.execute();
     } catch (error: any) {
       throw new Error(error);
     }
@@ -49,7 +62,7 @@ export class AlunoController {
 
   async update(disciplinaId: number, disciplina: Aluno) {
     try {
-      return await this.editarAluno.execute(disciplinaId, disciplina);
+      return await this.editarAlunoUseCase.execute(disciplinaId, disciplina);
     } catch (error: any) {
       throw new Error(error);
     }
@@ -57,7 +70,7 @@ export class AlunoController {
 
   async delete(disciplinaId: number) {
     try {
-      return await this.deletarAluno.execute(disciplinaId);
+      return await this.deletarAlunoUseCase.execute(disciplinaId);
     } catch (error: any) {
       throw new Error(error);
     }

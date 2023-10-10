@@ -1,34 +1,32 @@
 import { Request, Response } from "express";
-import { MatriculaRepository } from "../../secretary/matricula/infrastructure/repositories/MatriculaRepository";
+import { MatriculaRepository } from "../../secretary/infrastructure/repositories/MatriculaRepository";
 import {
-  Matricula,
-  FazerMatricula,
-  TrancarMatricula,
-} from "../../secretary/matricula";
+  FazerMatriculaUseCase,
+  TrancarMatriculaUseCase,
+} from "../../secretary/domain/useCases/matricula";
+import { Matricula } from "../../secretary/domain/Matricula";
+import {
+  RepositoryFactory,
+  UseCasesFactory,
+} from "../../shared.kernel/factory";
 
 export class MatriculaController {
   private matriculaRepository: MatriculaRepository;
-  private fazerMatricula: FazerMatricula;
-  private trancarMatricula: TrancarMatricula;
+  private fazerMatriculaUseCase: FazerMatriculaUseCase;
+  private trancarMatriculaUseCase: TrancarMatriculaUseCase;
 
   constructor() {
-    this.matriculaRepository = new MatriculaRepository();
-    this.fazerMatricula = new FazerMatricula();
-    this.trancarMatricula = new TazerMatricula();
+    this.matriculaRepository = RepositoryFactory.createMatriculaRepository();
+    this.fazerMatriculaUseCase = UseCasesFactory.createFazerMatriculaUseCase();
+    this.trancarMatriculaUseCase = UseCasesFactory.createTrancarMatriculaUseCase();
   }
 
-  async getAllMatriculas(
-    request: Request,
-    response: Response
-  ): Promise<Matricula[]> {
+  async getAllMatriculas(req: Request, res: Response): Promise<Matricula[]> {
     return await this.matriculaRepository.getAll();
   }
 
-  async fazerMatricula(
-    request: Request,
-    response: Response
-  ): Promise<Matricula> {
-    const matricula: Matricula = {
+  async fazerMatricula(req: Request, res: Response): Promise<Matricula> {
+    const matricula: Omit<Matricula, "matriculaId" | "trancado"> = {
       dataCadastro: req.body.dataCadastro,
       dataInicio: req.body.dataInicio,
       previsaoFim: req.body.previsaoFim,
@@ -36,13 +34,10 @@ export class MatriculaController {
       alunoId: req.body.alunoId,
     };
 
-    return await this.fazerMatricula.execute(matricula);
+    return await this.fazerMatriculaUseCase.execute(matricula);
   }
 
-  async trancarMatricula(
-    request: Request,
-    response: Response
-  ): Promise<Matricula> {
-    return await this.trancarMatricula.execute(req.body.matriculaId);
+  async trancarMatricula(req: Request, res: Response): Promise<Matricula> {
+    return await this.trancarMatriculaUseCase.execute(req.body.matriculaId);
   }
 }

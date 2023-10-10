@@ -9,4 +9,5 @@ export interface IDisciplinaRepository {
     idDisciplina: number,
     disciplina: Partial<Disciplina>
   ) => Promise<Disciplina>;
+  delete: (disciplinaId: number) => Promise<Disciplina>;
 }

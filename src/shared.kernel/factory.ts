@@ -3,24 +3,38 @@ import {
   DisciplinaController,
 } from "../application/controllers";
 import {
-  CriarDisciplina,
-  AtribuirDisciplina,
-  ObterDisciplina,
-  ListarDisciplinas,
-  EditarDisciplina,
-  DeletarDisciplina,
-} from "../secretary/domain";
+  ContaController,
+  ProdutoController,
+  PagamentoController,
+} from "../application/controllers";
+import { MatriculaController } from "../application/controllers/MatriculaController";
+import { AdicionaProdutoItemContaUseCase } from "../canteen/domain/useCases/Conta/AdicionaProdutoItemContaUseCase";
+import { CreateContaUseCase } from "../canteen/domain/useCases/Conta/CreateContaUseCase";
+import { DeleteContaUseCase } from "../canteen/domain/useCases/Conta/DeleteContaUseCase";
+import { FecharPagamentoUseCase } from "../canteen/domain/useCases/Pagamento/FecharPagamentoUseCase";
+import { ContaRepository } from "../canteen/infrastructure/repositories/ContaRepository";
+import { PagamentoRepository } from "../canteen/infrastructure/repositories/PagamentoRepository";
+import { ProdutoRepository } from "../canteen/infrastructure/repositories/ProdutoRepository";
 import {
-  CriarAluno,
-  DeletarAluno,
-  EditarAluno,
-  ListarAlunos,
-  ObterAluno,
-} from "../secretary/domain/useCases/aluno";
+  AtribuirDisciplinaUseCase,
+  CriarAlunoUseCase,
+  CriarDisciplinaUseCase,
+  DeletarAlunoUseCase,
+  DeletarDisciplinaUseCase,
+  EditarAlunoUseCase,
+  EditarDisciplinaUseCase,
+  FazerMatriculaUseCase,
+  ListarAlunosUseCase,
+  ListarDisciplinasUseCase,
+  ObterAlunoUseCase,
+  ObterDisciplinaUserCase,
+  TrancarMatriculaUseCase,
+} from "../secretary/domain";
 import {
   AlunoRepository,
   DisciplinaRepository,
 } from "../secretary/infrastructure/repositories";
+import { MatriculaRepository } from "../secretary/infrastructure/repositories/MatriculaRepository";
 
 export class ControllerFactory {
   static createAlunoController() {
@@ -28,6 +42,18 @@ export class ControllerFactory {
   }
   static createDisciplinaController() {
     return new DisciplinaController();
+  }
+  static createMatriculaController() {
+    return new MatriculaController();
+  }
+  static createContaController() {
+    return new ContaController();
+  }
+  static createProdutoController() {
+    return new ProdutoController();
+  }
+  static createPagamentoController() {
+    return new PagamentoController();
   }
 }
 
@@ -38,52 +64,107 @@ export class RepositoryFactory {
   static createDisciplinaRepository() {
     return new DisciplinaRepository();
   }
+  static createMatriculaRepository() {
+    return new MatriculaRepository();
+  }
+  static createContaRepository() {
+    return new ContaRepository();
+  }
+  static createProdutoRepository() {
+    return new ProdutoRepository();
+  }
+  static createPagamentoRepository() {
+    return new PagamentoRepository();
+  }
 }
 
 export class UseCasesFactory {
-  static createCriarDisciplina() {
-    return new CriarDisciplina(RepositoryFactory.createDisciplinaRepository());
+  static createCriarDisciplinaUseCase() {
+    return new CriarDisciplinaUseCase(
+      RepositoryFactory.createDisciplinaRepository()
+    );
   }
-  static createAtribuirDisciplina() {
-    return new AtribuirDisciplina(
+  static createAtribuirDisciplinaUseCase() {
+    return new AtribuirDisciplinaUseCase(
       RepositoryFactory.createAlunoRepository(),
       RepositoryFactory.createDisciplinaRepository()
     );
   }
-  static createObterDisciplina() {
-    return new ObterDisciplina(RepositoryFactory.createDisciplinaRepository());
-  }
-  static createListarDisciplinas() {
-    return new ListarDisciplinas(
+  static createObterDisciplinaUseCase() {
+    return new ObterDisciplinaUserCase(
       RepositoryFactory.createDisciplinaRepository()
     );
   }
-  static createEditarDisciplina() {
-    return new EditarDisciplina(RepositoryFactory.createDisciplinaRepository());
+  static createListarDisciplinasUseCase() {
+    return new ListarDisciplinasUseCase(
+      RepositoryFactory.createDisciplinaRepository()
+    );
   }
-  static createDeletarDisciplina() {
-    return new DeletarDisciplina(
+  static createEditarDisciplinaUseCase() {
+    return new EditarDisciplinaUseCase(
+      RepositoryFactory.createDisciplinaRepository()
+    );
+  }
+  static createDeletarDisciplinaUseCase() {
+    return new DeletarDisciplinaUseCase(
       RepositoryFactory.createDisciplinaRepository()
     );
   }
 
-  static createCriarAluno() {
-    return new CriarAluno(RepositoryFactory.createAlunoRepository());
+  static createCriarAlunoUseCase() {
+    return new CriarAlunoUseCase(RepositoryFactory.createAlunoRepository());
   }
 
-  static createObterAluno() {
-    return new ObterAluno(RepositoryFactory.createAlunoRepository());
+  static createObterAlunoUseCase() {
+    return new ObterAlunoUseCase(RepositoryFactory.createAlunoRepository());
   }
 
-  static createListarAlunos() {
-    return new ListarAlunos(RepositoryFactory.createAlunoRepository());
+  static createListarAlunosUseCase() {
+    return new ListarAlunosUseCase(RepositoryFactory.createAlunoRepository());
   }
 
-  static createEditarAluno() {
-    return new EditarAluno(RepositoryFactory.createAlunoRepository());
+  static createEditarAlunoUseCase() {
+    return new EditarAlunoUseCase(RepositoryFactory.createAlunoRepository());
   }
 
-  static createDeletarAluno() {
-    return new DeletarAluno(RepositoryFactory.createAlunoRepository());
+  static createDeletarAlunoUseCase() {
+    return new DeletarAlunoUseCase(RepositoryFactory.createAlunoRepository());
+  }
+
+  static createFazerMatriculaUseCase() {
+    return new FazerMatriculaUseCase(
+      RepositoryFactory.createMatriculaRepository()
+    );
+  }
+
+  static createTrancarMatriculaUseCase() {
+    return new TrancarMatriculaUseCase(
+      RepositoryFactory.createMatriculaRepository()
+    );
+  }
+
+  static createAdicionarProdutoItemContaUseCase() {
+    return new AdicionaProdutoItemContaUseCase(
+      RepositoryFactory.createProdutoRepository(),
+      RepositoryFactory.createContaRepository()
+    );
+  }
+
+  static createCreateContaUseCase() {
+    return new CreateContaUseCase(
+      RepositoryFactory.createAlunoRepository(),
+      RepositoryFactory.createContaRepository()
+    );
+  }
+
+  static createDeletaContaUseCase() {
+    return new DeleteContaUseCase(RepositoryFactory.createContaRepository());
+  }
+
+  static createFecharPagamentoUseCase() {
+    return new FecharPagamentoUseCase(
+      RepositoryFactory.createContaRepository(),
+      RepositoryFactory.createPagamentoRepository()
+    );
   }
 }
