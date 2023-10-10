@@ -54,6 +54,9 @@ export class MatriculaRepository implements IMatriculaRepository {
         id_aluno: alunoId,
       },
     });
+
+    if (!response_database) return null;
+
     response_database.forEach((matricula) => {
       this.matriculas.push(
         new Matricula({

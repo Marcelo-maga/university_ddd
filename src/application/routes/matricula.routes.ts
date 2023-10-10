@@ -36,6 +36,14 @@ export const matriculaRoutes = (router: ExpressRouter) => {
    *         application/json:
    *           schema:
    *             $ref: '#/components/schemas/Matricula'
+   *           example:
+   *                {
+   *                  "dataCadastro": "2021-10-10",
+   *                  "dataInicio": "2021-10-10",
+   *                  "previsaoFim": "2021-10-10",
+   *                  "curso": "Engenharia de Software",
+   *                  "alunoId": "1",
+   *                }
    *     responses:
    *       201:
    *         description: Matricula Trancada com sucesso
