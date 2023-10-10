@@ -10,7 +10,7 @@ export default class Server {
   private readonly express: express.Application;
   private readonly port: string = Environment.port;
 
-  constructor(routes: express.Router) {
+  constructor() {
     this.express = express();
     this.express.use("/docs", swaggerUi.serve, swaggerUi.setup(Swagger.spec));
 

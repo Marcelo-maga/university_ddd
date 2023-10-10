@@ -1,6 +1,3 @@
 import Server from "./application/server"
-import { Router } from "./application/routes/routes"
-
-const server = new Server(Router())
-
+const server = new Server()
 server.start()

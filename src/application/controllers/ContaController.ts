@@ -28,11 +28,21 @@ export class ContaController {
   }
 
   async createConta(req: Request, res: Response): Promise<Conta> {
-    
+    return new Conta({
+      id_aluno:1,
+      id_conta: 1,
+      data_criação: new Date(),
+      numero_conta: 78907
+    })
   }
 
   async deleteConta(req: Request, res: Response): Promise<Conta> {
-    
+    return new Conta({
+      id_aluno:1,
+      id_conta: 1,
+      data_criação: new Date(),
+      numero_conta: 78907
+    })
   }
 
 }

@@ -5,16 +5,6 @@ import { contaRoutes } from "./conta.routes";
 import { matriculaRoutes } from "./matricula.routes";
 import { produtoRoutes } from "./produto.routes";
 
-// export const Router = (): ExpressRouter => {
-//   const router = ExpressRouter();
-
-//   router.get("/", (request, response) => {
-//     response.json({ message: "Olá mundo" });
-//   });
-
-//   return router;
-// };
-
 export const setupRoutes = (router: Router) => {
   /**
    * @swagger
