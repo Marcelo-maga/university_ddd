@@ -1,10 +1,6 @@
-import express from "express"
-const app = express()
+import Server from "./application/server"
+import { Router } from "./application/routes/routes"
 
-app.get("/docker", (req, res) => {
-  res.send("docker on! 🟢")
-})
+const server = new Server(Router())
 
-app.listen(3000, () => {
-  console.log("Servidor rodando na porta 3000 🏆")
-})
+server.start()
