@@ -3,10 +3,8 @@ import { Environment } from "../shared.kernel/environment";
 
 import swaggerUi from "swagger-ui-express";
 import { Swagger } from "./swagger";
-import swaggerJSDoc from "swagger-jsdoc";
 import { setupRoutes } from "./routes/routes";
-import { AlunoController, DisciplinaController, MatriculaController } from "./controllers";
-import { ControllerFactory } from "../shared.kernel/factory";
+
 const router = Router();
 
 export default class Server {
