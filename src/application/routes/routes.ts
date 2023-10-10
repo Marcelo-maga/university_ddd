@@ -79,4 +79,6 @@ export const setupRoutes = (router: Router) => {
   matriculaRoutes(router);
   alunosRoutes(router);
   produtoRoutes(router);
+
+  return router;
 };
