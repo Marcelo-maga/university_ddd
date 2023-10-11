@@ -9,6 +9,8 @@ export class ProdutoRepository implements IProdutoRepository {
     public async getAll(): Promise<Produto[]> {
         const response_database = await this.prisma.produto.findMany()
 
+        this.produtos = []
+
         response_database.forEach(produto => {
             this.produtos.push(
                 new Produto({ 

@@ -9,6 +9,8 @@ export class MatriculaRepository implements IMatriculaRepository {
   public async getAll(): Promise<Matricula[]> {
     const response_database = await this.prisma.matricula.findMany();
 
+    this.matriculas = []
+    
     response_database.forEach((matricula) => {
       this.matriculas.push(
         new Matricula({
@@ -115,6 +117,7 @@ export class MatriculaRepository implements IMatriculaRepository {
         data_inicio: matricula.dataInicio,
         previsao_fim: matricula.previsaoFim,
         curso: matricula.curso,
+        trancado: matricula.trancado
       },
     });
 

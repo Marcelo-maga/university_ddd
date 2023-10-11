@@ -23,10 +23,6 @@ export const setupRoutes = (router: ExpressRouter) => {
    *     Disciplina:
    *       type: object
    *       properties:
-   *         id:
-   *           type: string
-   *           description: Identificador único da disciplina
-   *           example: 1
    *         nome:
    *           type: string
    *           description: Nome da disciplina
@@ -52,10 +48,6 @@ export const setupRoutes = (router: ExpressRouter) => {
    *     Aluno:
    *      type: object
    *      properties:
-   *        id:
-   *          type: string
-   *          description: Identificador único do aluno
-   *          example: 1
    *        nome:
    *          type: string
    *          description: Nome do aluno
@@ -82,6 +74,24 @@ export const setupRoutes = (router: ExpressRouter) => {
    *            $ref: '#/components/schemas/Disciplina'
    *          description: Disciplinas do aluno
    *          example: []
+   */
+
+  /**
+   * @swagger
+   * components:
+   *   schemas:
+   *     produto:
+   *      type: object
+   *      properties:
+   *        valor:
+   *          type: number
+   *          description: valor do produto
+   *          example: 20
+   *        descricao:
+   *          type: string
+   *          description: descricao do produto
+   *          example: descricao do produto teste
+   *        
    */
   alunosRoutes(router);
   contaRoutes(router);
