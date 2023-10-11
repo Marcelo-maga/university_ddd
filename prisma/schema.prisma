@@ -1,0 +1,77 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Aluno {
+  id_aluno     Int      @id @default(autoincrement())
+  nome         String
+  sobreNome    String
+  email        String   @unique
+  dataCadastro DateTime
+  ativo        Boolean
+
+  disciplinas Disciplina[] @relation("AlunoDisciplina")
+  Matricula   Matricula[]
+  conta       Conta?
+}
+
+model Disciplina {
+  id_disciplina Int     @id @default(autoincrement())
+  nome          String  @unique
+  valor         Int
+  disponivel    Boolean
+  ead           Boolean
+
+  alunos Aluno[] @relation("AlunoDisciplina")
+}
+
+model Matricula {
+  id_matricula  Int      @id @default(autoincrement())
+  data_cadastro DateTime
+  data_inicio   DateTime
+  previsao_fim  DateTime
+  curso         String
+  trancado      Boolean  @default(false)
+  id_aluno      Int
+
+  aluno Aluno @relation(fields: [id_aluno], references: [id_aluno])
+}
+model Conta {
+  id_conta     Int      @id @default(autoincrement())
+  id_aluno     Int      @unique
+  numero_conta Int      @unique
+  data_criacao DateTime @default(now())
+
+  user       Aluno       @relation(fields: [id_aluno], references: [id_aluno])
+  pagamentos Pagamento[]
+}
+
+model ItemConta {
+  id_itemConta Int @id @default(autoincrement())
+  id_conta     Int
+  status       Boolean
+
+  produtos Produto[] @relation("ItemProduto")
+}
+
+model Produto {
+  id_produto   Int    @id @default(autoincrement())
+  descricao    String
+  valor        Int
+  
+  itemContas ItemConta[] @relation("ItemProduto")
+}
+
+model Pagamento {
+  id_pagamento   Int      @id @default(autoincrement())
+  id_conta       Int
+  valor          Int
+  data_pagamento DateTime @default(now())
+
+  conta Conta @relation(fields: [id_conta], references: [id_conta])
+}
