@@ -7,22 +7,22 @@ export class CreateContaUseCase {
     private readonly contaRepository: ContaRepository
   ) {}
 
-  async execute(id_aluno: number) {
-    const aluno = await this.alunoRepository.get(id_aluno);
+  async execute(alunoId: number) {
+    const aluno = await this.alunoRepository.get(alunoId);
 
     if (!aluno) {
       throw new Error("Aluno não encontrado");
     }
 
     const aluno_have_conta = await this.contaRepository.get_conta_by_id_aluno(
-      id_aluno
+      alunoId
     );
 
     if (aluno_have_conta) {
       throw new Error("Aluno já possui uma conta");
     }
 
-    const conta = this.contaRepository.create(id_aluno);
+    const conta = this.contaRepository.create(alunoId);
     return conta;
   }
 }

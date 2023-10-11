@@ -21,9 +21,7 @@ export class AdicionaProdutoItemContaUseCase {
     );
 
     if (!id_itemConta) {
-      const id_itemConta = await this.contaRepository.create_item_conta(
-        id_conta
-      );
+      const id_itemConta = await this.contaRepository.create_item_conta(id_conta);
       if (!id_itemConta) throw new Error("Erro ao criar item conta");
       const response = await this.contaRepository.adiciona_produto_item_conta(
         id_produto,
@@ -37,6 +35,7 @@ export class AdicionaProdutoItemContaUseCase {
         id_itemConta.id_itemConta
       );
       return response
+
     }
 
   }

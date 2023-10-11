@@ -6,10 +6,16 @@ export class PagamentoRepository implements IPagamentoRepository {
     private prisma = createPrismaClient();
 
     public async fechar_pagamento(id_conta: number, valor: number): Promise<Pagamento> {
+
+        console.log(id_conta, valor)
+        
+        // Cria o registro de Pagamento
         const response_database = await this.prisma.pagamento.create({
+            
             data: {
                 id_conta: id_conta,
-                valor: valor
+                valor: valor,
+
             }
         })
 

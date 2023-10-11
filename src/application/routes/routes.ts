@@ -4,6 +4,7 @@ import { contaRoutes } from "./conta.routes";
 import { matriculaRoutes } from "./matricula.routes";
 import { produtoRoutes } from "./produto.routes";
 import { Router as ExpressRouter } from "express";
+import { pagamentoRoutes } from "./pagamento.routes";
 
 // export const Router = (): ExpressRouter => {
 //   const router = ExpressRouter();
@@ -99,6 +100,7 @@ export const setupRoutes = (router: ExpressRouter) => {
   matriculaRoutes(router);
   alunosRoutes(router);
   produtoRoutes(router);
+  pagamentoRoutes(router);
 
   return router;
 };
