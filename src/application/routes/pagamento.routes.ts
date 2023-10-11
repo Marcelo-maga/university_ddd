@@ -16,7 +16,7 @@ export const pagamentoRoutes = (router: ExpressRouter) => {
   /**
    * @swagger
    * /pagamento/{id}:
-   *   delete:
+   *   post:
    *     summary: Fecha a conta
    *     tags: [Pagamento]
    *     parameters:
@@ -26,6 +26,12 @@ export const pagamentoRoutes = (router: ExpressRouter) => {
    *         description: ID da conta
    *         schema:
    *           type: string
+   *     requestBody:
+   *       required: true
+   *       content:
+   *         application/json:
+   *           schema:
+   *             $ref: '#/components/schemas/Aluno'
    *     responses:
    *       200:
    *         description: Pagamento feito com sucesso
