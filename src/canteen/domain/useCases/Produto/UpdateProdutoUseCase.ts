@@ -7,7 +7,7 @@ export class UpdateProdutoUseCase {
         private readonly produtoRepository: ProdutoRepository
     ) {}
 
-    async execute(id_produto: number, produto: Produto) {
+    async execute(id_produto: number, produto: Omit<Produto, "id_produto">) {
         const produtoExistente = await this.produtoRepository.get(id_produto);
 
         if (!produtoExistente) {

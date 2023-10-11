@@ -1,4 +1,3 @@
-import { Request, Response } from "express";
 import { PagamentoRepository } from "../../canteen/infrastructure/repositories/PagamentoRepository";
 import { Pagamento } from "../../canteen/domain/Pagamento";
 import { RepositoryFactory, UseCasesFactory } from "../../shared.kernel/factory";
@@ -13,7 +12,9 @@ export class PagamentoController {
     this.fecharPagamentoUseCase = UseCasesFactory.createFecharPagamentoUseCase();
   }
 
-  async fechaPagamento(req: Request, res: Response) {
+  async fechaPagamento(id_conta: number): Promise<Pagamento | boolean> {
+    const pagamento = await this.fecharPagamentoUseCase.execute(id_conta);
+    return pagamento;
   }
 
 }
