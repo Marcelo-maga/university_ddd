@@ -1,11 +1,21 @@
-import { Router } from "express";
 import { alunosRoutes } from "./alunos.routes";
 import { disciplinaRoutes } from "./disciplina.routes";
 import { contaRoutes } from "./conta.routes";
 import { matriculaRoutes } from "./matricula.routes";
 import { produtoRoutes } from "./produto.routes";
+import { Router as ExpressRouter } from "express";
 
-export const setupRoutes = (router: Router) => {
+// export const Router = (): ExpressRouter => {
+//   const router = ExpressRouter();
+
+//   router.get("/", (request, response) => {
+//     response.json({ message: "Olá mundo" });
+//   });
+
+//   return router;
+// };
+
+export const setupRoutes = (router: ExpressRouter) => {
   /**
    * @swagger
    * components:
@@ -13,10 +23,6 @@ export const setupRoutes = (router: Router) => {
    *     Disciplina:
    *       type: object
    *       properties:
-   *         id:
-   *           type: string
-   *           description: Identificador único da disciplina
-   *           example: 1
    *         nome:
    *           type: string
    *           description: Nome da disciplina
@@ -42,10 +48,6 @@ export const setupRoutes = (router: Router) => {
    *     Aluno:
    *      type: object
    *      properties:
-   *        id:
-   *          type: string
-   *          description: Identificador único do aluno
-   *          example: 1
    *        nome:
    *          type: string
    *          description: Nome do aluno
@@ -72,6 +74,24 @@ export const setupRoutes = (router: Router) => {
    *            $ref: '#/components/schemas/Disciplina'
    *          description: Disciplinas do aluno
    *          example: []
+   */
+
+  /**
+   * @swagger
+   * components:
+   *   schemas:
+   *     produto:
+   *      type: object
+   *      properties:
+   *        valor:
+   *          type: number
+   *          description: valor do produto
+   *          example: 20
+   *        descricao:
+   *          type: string
+   *          description: descricao do produto
+   *          example: descricao do produto teste
+   *        
    */
   alunosRoutes(router);
   contaRoutes(router);

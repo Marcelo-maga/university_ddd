@@ -18,7 +18,7 @@ export const contaRoutes = (router: ExpressRouter) => {
    *   post:
    *     summary: Cria a conta
    *     tags: [Conta]
-   *      requestBody:
+   *     requestBody:
    *       required: true
    *       content:
    *         application/json:

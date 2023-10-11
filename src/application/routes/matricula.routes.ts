@@ -9,6 +9,7 @@ export const matriculaRoutes = (router: ExpressRouter) => {
    * /matricula/getAll:
    *  get:
    *   description: Use to request all matriculas
+   *   tags: [Matricula]
    *   responses:
    *    200:
    *     description: A successful response
@@ -36,6 +37,14 @@ export const matriculaRoutes = (router: ExpressRouter) => {
    *         application/json:
    *           schema:
    *             $ref: '#/components/schemas/Matricula'
+   *           example:
+   *                {
+   *                  "dataCadastro": "2023-10-10T23:32:49.412Z",
+   *                  "dataInicio": "2023-10-10T23:32:49.412Z",
+   *                  "previsaoFim": "2023-10-10T23:32:49.412Z",
+   *                  "curso": "Engenharia de Software",
+   *                  "alunoId": 1,
+   *                }
    *     responses:
    *       201:
    *         description: Matricula Trancada com sucesso
@@ -60,19 +69,23 @@ export const matriculaRoutes = (router: ExpressRouter) => {
    * @swagger
    * /matricula/trancarMatricula:
    *   put:
-   *     summary: Trancar Matricula
-   *     tags: [Aluno]
+   *     summary: Trancar Matricula   
+   *     tags: [Matricula]
    *     requestBody:
    *       required: true
    *       content:
    *         application/json:
    *           schema:
-   *             $ref: '#/components/schemas/Aluno'
+   *             $ref: '#/components/schemas/Matricula'
+   *           example:
+   *                {
+   *                    "matriculaId": 1
+   *                }
    *     responses:
-   *       201:
-   *         description: Aluno criado com sucesso
+   *       200:
+   *         description: Matricula trancada com sucesso
    *       400:
-   *         description: Erro ao criar aluno
+   *         description: Erro ao trancar matricula
    *       500:
    *         description: Erro interno
    */
