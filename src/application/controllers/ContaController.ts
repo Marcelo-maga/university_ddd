@@ -24,8 +24,8 @@ export class ContaController {
     return conta;
   }
 
-  async createConta(id_aluno: number): Promise<Conta> {
-    const nova_conta = await this.createContaUseCase.execute(id_aluno);
+  async createConta(alunoId: number): Promise<Conta> {
+    const nova_conta = await this.createContaUseCase.execute(alunoId);
     return nova_conta;
   }
 

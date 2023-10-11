@@ -3,8 +3,7 @@ import { PagamentoController } from "../controllers/PagamentoController";
 import { ControllerFactory } from "../../shared.kernel/factory";
 
 export const pagamentoRoutes = (router: ExpressRouter) => {
-  const pagamentoController: PagamentoController =
-    ControllerFactory.createPagamentoController();
+  const pagamentoController: PagamentoController = ControllerFactory.createPagamentoController();
 
   /**
    * @swagger
@@ -26,12 +25,6 @@ export const pagamentoRoutes = (router: ExpressRouter) => {
    *         description: ID da conta
    *         schema:
    *           type: string
-   *     requestBody:
-   *       required: true
-   *       content:
-   *         application/json:
-   *           schema:
-   *             $ref: '#/components/schemas/Aluno'
    *     responses:
    *       200:
    *         description: Pagamento feito com sucesso
@@ -41,8 +34,10 @@ export const pagamentoRoutes = (router: ExpressRouter) => {
    *         description: Erro interno
    */
   router.post("/pagamento/:id", async (req, res) => {
+    console.log(req.body)
+
     try {
-      const conta = await pagamentoController.fechaPagamento(req.body);
+      const conta = await pagamentoController.fechaPagamento(Number(req.params.id));
       res.status(201).json(conta);
     } catch (error: any) {
       res.status(400).json({ message: error.message });

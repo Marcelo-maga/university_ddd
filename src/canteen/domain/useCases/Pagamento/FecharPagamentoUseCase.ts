@@ -10,10 +10,10 @@ export class FecharPagamentoUseCase {
   async execute(id_conta: number) {
     const itemConta = await this.contaRepository.get_open_item_conta(id_conta);
 
-    if (!itemConta) return false;
+    if (!itemConta) throw new Error("Conta não encontrada");
 
     const pagamento = await this.pagamentoRepository.fechar_pagamento(
-      itemConta.id_itemConta,
+      id_conta,
       itemConta.valor_total
     );
 
