@@ -8,10 +8,7 @@ import {
   PagamentoController,
 } from "../application/controllers";
 import { MatriculaController } from "../application/controllers/MatriculaController";
-import { AdicionaProdutoItemContaUseCase } from "../canteen/domain/useCases/Conta/AdicionaProdutoItemContaUseCase";
-import { CreateContaUseCase } from "../canteen/domain/useCases/Conta/CreateContaUseCase";
-import { DeleteContaUseCase } from "../canteen/domain/useCases/Conta/DeleteContaUseCase";
-import { FecharPagamentoUseCase } from "../canteen/domain/useCases/Pagamento/FecharPagamentoUseCase";
+
 import { ContaRepository } from "../canteen/infrastructure/repositories/ContaRepository";
 import { PagamentoRepository } from "../canteen/infrastructure/repositories/PagamentoRepository";
 import { ProdutoRepository } from "../canteen/infrastructure/repositories/ProdutoRepository";
@@ -30,6 +27,19 @@ import {
   ObterDisciplinaUserCase,
   TrancarMatriculaUseCase,
 } from "../secretary/domain";
+
+import {
+  AdicionaProdutoItemContaUseCase,
+  CreateContaUseCase,
+  DeleteContaUseCase,
+  CreateProdutoUseCase,
+  DeleteProdutoUseCase,
+  FecharPagamentoUseCase,
+  GetAllProdutoUseCase,
+  GetProdutoUseCase,
+  UpdateProdutoUseCase,
+} from "../canteen/domain/";
+
 import {
   AlunoRepository,
   DisciplinaRepository,
@@ -167,4 +177,34 @@ export class UseCasesFactory {
       RepositoryFactory.createPagamentoRepository()
     );
   }
+
+  static createCreateProdutoUseCase() {
+    return new CreateProdutoUseCase(
+      RepositoryFactory.createProdutoRepository()
+    );
+  }
+
+  static createDeleteProdutoUseCase() {
+    return new DeleteProdutoUseCase(
+      RepositoryFactory.createProdutoRepository()
+    );
+  }
+
+  static createGetAllProdutoUseCase() {
+    return new GetAllProdutoUseCase(
+      RepositoryFactory.createProdutoRepository()
+    );
+  }
+
+  static createGetProdutoUseCase() {
+    return new GetProdutoUseCase(RepositoryFactory.createProdutoRepository());
+  }
+
+  static createUpdateProdutoUseCase() {
+    return new UpdateProdutoUseCase(
+      RepositoryFactory.createProdutoRepository()
+    );
+  }
+
+  
 }

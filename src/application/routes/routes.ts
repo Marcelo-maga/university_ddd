@@ -89,4 +89,6 @@ export const setupRoutes = (router: ExpressRouter) => {
   matriculaRoutes(router);
   alunosRoutes(router);
   produtoRoutes(router);
+
+  return router;
 };

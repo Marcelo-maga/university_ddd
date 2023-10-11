@@ -1,10 +1,6 @@
-import { Request, Response } from "express";
 import { ContaRepository } from "../../canteen/infrastructure/repositories/ContaRepository";
-
 import { Conta } from "../../canteen/domain/Conta";
-
 import { CreateContaUseCase, DeleteContaUseCase, AdicionaProdutoItemContaUseCase } from '../../canteen/domain/useCases/Conta'
-
 import {
     RepositoryFactory,
     UseCasesFactory
@@ -23,26 +19,19 @@ export class ContaController {
     this.adicionaProdutoItemContaUseCase = UseCasesFactory.createAdicionarProdutoItemContaUseCase()
   }
 
-  async adicionaProdutoItemConta(req: Request, res: Response) {
-    
+  async adicionaProdutoItemConta(id_conta:number, id_produto:number) {
+    const conta = await this.adicionaProdutoItemContaUseCase.execute(id_conta, id_produto);
+    return conta;
   }
 
-  async createConta(req: Request, res: Response): Promise<Conta> {
-    return new Conta({
-      id_aluno:1,
-      id_conta: 1,
-      data_criação: new Date(),
-      numero_conta: 78907
-    })
+  async createConta(id_aluno: number): Promise<Conta> {
+    const nova_conta = await this.createContaUseCase.execute(id_aluno);
+    return nova_conta;
   }
 
-  async deleteConta(req: Request, res: Response): Promise<Conta> {
-    return new Conta({
-      id_aluno:1,
-      id_conta: 1,
-      data_criação: new Date(),
-      numero_conta: 78907
-    })
+  async deleteConta(id_aluno: number): Promise<Conta | null> {
+    const delete_conta = await this.deleteContaUseCase.execute(id_aluno);
+    return delete_conta;
   }
 
 }

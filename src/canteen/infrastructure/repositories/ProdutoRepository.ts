@@ -38,7 +38,7 @@ export class ProdutoRepository implements IProdutoRepository {
         })
     }
 
-    public async create(new_produto: Omit<Produto, "ProdutoId">): Promise<Produto> {
+    public async create(new_produto: Omit<Produto, "produto_id">): Promise<Produto> {
         const response_database = await this.prisma.produto.create({
             data: {
                 descricao: new_produto.descricao,
